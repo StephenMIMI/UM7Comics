@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target 'UM7Comics' do
+  pod 'Alamofire'
+  pod 'Kingfisher','~>2.6'
+  pod 'MJRefresh'
+  pod 'SnapKit','~>0.22.0'
+  pod 'SwiftyJSON','~>2.3.2'
+end
