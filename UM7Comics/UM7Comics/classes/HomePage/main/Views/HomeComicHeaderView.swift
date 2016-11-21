@@ -52,22 +52,22 @@ class HomeComicHeaderView: UIView {
             make.width.equalTo(80)
         })
         
-        downloadBtn = UIButton(type: .Custom)
-        downloadBtn?.setTitle("下载", forState: .Normal)
-        downloadBtn?.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        downloadBtn?.backgroundColor = UIColor.orangeColor()
-        downloadBtn?.addTarget(self, action: #selector(startDownload), forControlEvents: .TouchUpInside)
-        downloadBtn?.layer.cornerRadius = 5
-        downloadBtn?.layer.masksToBounds = true
-        addSubview(downloadBtn!)
-        
-        downloadBtn?.snp_makeConstraints(closure: { [weak self](make) in
-            make.top.equalTo(self!).offset(5)
-            make.bottom.equalTo(self!).offset(-5)
-            make.right.equalTo((self!.startReadBtn?.snp_left)!).offset(-10)
-            make.width.equalTo(80)
-            
-        })
+//        downloadBtn = UIButton(type: .Custom)
+//        downloadBtn?.setTitle("下载", forState: .Normal)
+//        downloadBtn?.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+//        downloadBtn?.backgroundColor = UIColor.orangeColor()
+//        downloadBtn?.addTarget(self, action: #selector(startDownload), forControlEvents: .TouchUpInside)
+//        downloadBtn?.layer.cornerRadius = 5
+//        downloadBtn?.layer.masksToBounds = true
+//        addSubview(downloadBtn!)
+//        
+//        downloadBtn?.snp_makeConstraints(closure: { [weak self](make) in
+//            make.top.equalTo(self!).offset(5)
+//            make.bottom.equalTo(self!).offset(-5)
+//            make.right.equalTo((self!.startReadBtn?.snp_left)!).offset(-10)
+//            make.width.equalTo(80)
+//            
+//        })
         
         descLabel = UILabel()
         descLabel?.font = UIFont.systemFontOfSize(12)
@@ -79,7 +79,7 @@ class HomeComicHeaderView: UIView {
             make.left.equalTo(5)
             make.top.equalTo(self!).offset(10)
             make.height.equalTo(20)
-            make.right.equalTo((self!.downloadBtn?.snp_left)!).offset(20)
+            make.right.equalTo((self!.startReadBtn?.snp_left)!).offset(50)
         })
     }
     

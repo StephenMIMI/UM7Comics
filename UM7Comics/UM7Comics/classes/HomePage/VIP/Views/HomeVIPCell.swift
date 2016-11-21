@@ -146,12 +146,12 @@ class HomeVIPCell: UITableViewCell {
                 case 0:
                     vipLabel.hidden = true
                 case 1:
-                    vipLabel.text = "付费"
+                    vipLabel.text = "UP"
                     vipLabel.backgroundColor = UIColor.init(red: 255/255.0, green: 209/255.0, blue: 115/255.0, alpha: 1.0)
                 case 2:
                     vipLabel.hidden = true
                 case 3:
-                    vipLabel.text = "VIP"
+                    vipLabel.text = "Hot"
                     vipLabel.backgroundColor = UIColor.init(red: 242/255.0, green: 100/255.0, blue: 1/255.0, alpha: 1.0)
                 default:
                     break

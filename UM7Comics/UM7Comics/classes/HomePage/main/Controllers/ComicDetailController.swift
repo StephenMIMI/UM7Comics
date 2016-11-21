@@ -220,7 +220,7 @@ extension ComicDetailController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.section == 0 {
                 height = 200
             }else if indexPath.section == 1 {
-                height = HomeComicChapterCell.heightForChapter((comicDetailModel?.data?.returnData?.chapter_list?.count)!)
+                height = HomeComicChapterCell.heightForChapter((comicDetailModel?.data?.returnData?.chapter_list?.count)!, model: comicDetailModel?.data?.returnData)
             }
         }
         return height
@@ -286,23 +286,23 @@ extension ComicDetailController: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        var height: CGFloat = 0
-        if section == 1 {
-            height = 44
-        }
-        return height
-    }
-    
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 1 {
-            let cell = HomeComicChapterFooter.init(frame: CGRectMake(0,0,screenWidth,44))
-            cell.model = comicTicketModel?.data?.returnData?.comment
-            cell.controller = self
-            return cell
-        }
-        return nil
-    }
+//    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        var height: CGFloat = 0
+//        if section == 1 {
+//            height = 44
+//        }
+//        return height
+//    }
+//    
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        if section == 1 {
+//            let cell = HomeComicChapterFooter.init(frame: CGRectMake(0,0,screenWidth,44))
+//            cell.model = comicTicketModel?.data?.returnData?.comment
+//            cell.controller = self
+//            return cell
+//        }
+//        return nil
+//    }
     
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false

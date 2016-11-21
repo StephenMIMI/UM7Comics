@@ -31,7 +31,7 @@ class HomePageViewController: BaseViewController {
         
         //选择控件
         let frame = CGRectMake(0, 0, screenWidth-120, 44)
-        segCtrl = CustomSegCtrl(frame: frame, titleArray: ["推荐","VIP","订阅","排行"])
+        segCtrl = CustomSegCtrl(frame: frame, titleArray: ["推荐","HOT","订阅","排行"])
         segCtrl!.delegate = self
         navigationItem.titleView = segCtrl
         

@@ -32,10 +32,18 @@ class HomeComicChapterCell: UITableViewCell {
         }
     }
     //返回View的动态高度
-    class func heightForChapter(num: Int) ->CGFloat {
+    class func heightForChapter(num: Int, model: ComicDetailReturnData?) ->CGFloat {
         //获取行数
-        var row = num/2
-        if num%2 > 0 {
+        var count = 0
+        for i in 0..<num {
+            if let chapterList = model?.chapter_list {
+                if chapterList[i].type != 3 {
+                    count += 1
+                }
+            }
+        }
+        var row = count/2
+        if count%2 > 0 {
             row += 1
         }
         return CGFloat(row)*(btnH+margin)+30+40
@@ -64,50 +72,54 @@ class HomeComicChapterCell: UITableViewCell {
         if let realCount = model?.chapter_list?.count {
             //先配置基础页面
             let chapterList = model?.chapter_list
-            if let tmpTime = chapterList![realCount-1].pass_time {
-                updateLabel?.text = "\(configDate(tmpTime)) 更新到\(chapterList![realCount-1].name!)"
-            }
-            var num = 0
+//            if let tmpTime = chapterList![realCount-1].pass_time {
+//                updateLabel?.text = "\(configDate(tmpTime)) 更新到\(chapterList![realCount-1].name!)"
+//            }
+            var num = 0//控制是否倒序显示
+            var pos = 0//控制显示位置
             for i in 0..<realCount {
-                let btn = UIButton(type: .Custom)
                 //倒叙显示
                 if sortBool == false {
                     num = realCount-i-1
                 }else {
                     num = i
                 }
-                
-                btn.frame = CGRectMake(10+(HomeComicChapterCell.btnW+10)*CGFloat(i%2), 30+(HomeComicChapterCell.btnH+HomeComicChapterCell.margin)*CGFloat(i/2), HomeComicChapterCell.btnW, HomeComicChapterCell.btnH)
-                btn.tag = 100+num
-                btn.layer.cornerRadius = 5
-                btn.layer.masksToBounds = true
-                btn.layer.borderWidth = 1
-                btn.layer.borderColor = UIColor.grayColor().CGColor
-                btn.backgroundColor = UIColor.whiteColor()
-                btn.addTarget(self, action: #selector(readComic(_:)), forControlEvents: .TouchUpInside)
-                addSubview(btn)
-                
-                let btnShowLabel = createLabel(CGRectMake(10,2,btn.bounds.width-20,btn.bounds.height-4), title: chapterList![num].name, font: UIFont.systemFontOfSize(14))
-                btnShowLabel.textAlignment = .Center
-                btn.addSubview(btnShowLabel)
-                //记录最后一个button的位置
-                lastBtn = btn
-                
-                if chapterList![num].type == 3 {
+                if chapterList![num].type != 3 {
+                    
+                    let btn = UIButton(type: .Custom)
+                    
+                    btn.frame = CGRectMake(10+(HomeComicChapterCell.btnW+10)*CGFloat(pos%2), 30+(HomeComicChapterCell.btnH+HomeComicChapterCell.margin)*CGFloat(pos/2), HomeComicChapterCell.btnW, HomeComicChapterCell.btnH)
+                    btn.tag = 100+num
+                    btn.layer.cornerRadius = 5
+                    btn.layer.masksToBounds = true
+                    btn.layer.borderWidth = 1
+                    btn.layer.borderColor = UIColor.grayColor().CGColor
+                    btn.backgroundColor = UIColor.whiteColor()
+                    btn.addTarget(self, action: #selector(readComic(_:)), forControlEvents: .TouchUpInside)
+                    addSubview(btn)
+                    
+                    let btnShowLabel = createLabel(CGRectMake(10,2,btn.bounds.width-20,btn.bounds.height-4), title: chapterList![num].name, font: UIFont.systemFontOfSize(14))
+                    btnShowLabel.textAlignment = .Center
+                    btn.addSubview(btnShowLabel)
+                    //记录最后一个button的位置
+                    lastBtn = btn
+                    pos += 1//自增
+                }
+//                if chapterList![num].type == 3 {
                     //显示VIP Label
-                    let vipLabel = createLabel(CGRectMake(0,0,10,12), title: "V", font: UIFont.systemFontOfSize(10))
-                    vipLabel.textAlignment = .Right
-                    vipLabel.textColor = UIColor.whiteColor()
-                    vipLabel.backgroundColor = UIColor.orangeColor()
-                    btn.addSubview(vipLabel)
-                }
-                if chapterList![num].is_new == 1 {
-                    //显示new Label
-                    let newLabel = createLabel(CGRectMake(HomeComicChapterCell.btnW-10,0,10,12), title: "N", font: UIFont.systemFontOfSize(10))
-                    newLabel.textColor = UIColor.whiteColor()
-                    newLabel.backgroundColor = lightGreen
-                    btn.addSubview(newLabel)
-                }
+//                    let vipLabel = createLabel(CGRectMake(0,0,10,12), title: "V", font: UIFont.systemFontOfSize(10))
+//                    vipLabel.textAlignment = .Right
+//                    vipLabel.textColor = UIColor.whiteColor()
+//                    vipLabel.backgroundColor = UIColor.orangeColor()
+//                    btn.addSubview(vipLabel)
+//                }
+//                if chapterList![num].is_new == 1 {
+//                    //显示new Label
+//                    let newLabel = createLabel(CGRectMake(HomeComicChapterCell.btnW-10,0,10,12), title: "N", font: UIFont.systemFontOfSize(10))
+//                    newLabel.textColor = UIColor.whiteColor()
+//                    newLabel.backgroundColor = lightGreen
+//                    btn.addSubview(newLabel)
+//                }
             }
             //修改moreBtn的约束
             moreChapterBtn = UIButton(type: .Custom)
@@ -156,11 +168,11 @@ class HomeComicChapterCell: UITableViewCell {
         }
         sortBtn!.addSubview(sortLabel!)
 
-        if updateLabel == nil {
-            updateLabel = createLabel(CGRectMake(45,5,screenWidth-35-45,20), title: nil, font: UIFont.systemFontOfSize(12))
-            updateLabel?.textColor = UIColor.grayColor()
-        }
-        addSubview(updateLabel!)
+//        if updateLabel == nil {
+//            updateLabel = createLabel(CGRectMake(45,5,screenWidth-35-45,20), title: nil, font: UIFont.systemFontOfSize(12))
+//            updateLabel?.textColor = UIColor.grayColor()
+//        }
+//        addSubview(updateLabel!)
 
         
     }
