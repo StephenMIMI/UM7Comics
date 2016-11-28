@@ -39,8 +39,6 @@ class HomePageViewController: BaseViewController {
         downloadRecommendData()//下载首页的推荐数据
         downloadVIPData()//下载VIP页面的数据
         downloadSubscribeData()//下载订阅页面的数据
-        
-
     }
     
     //创建首页滚动视图
@@ -176,7 +174,7 @@ extension HomePageViewController: U17DownloadDelegate {
                 //分类页面
                 if let model = HomeVIPModel.parseData(tmpData).data?.returnData?.comics {
                     subscribeView?.model = model
-                    VIPView?.downloadType = .HomeSubscribe
+                    subscribeView?.downloadType = .HomeSubscribe
                     subscribeView?.viewType = ViewType.Subscribe
                     subscribeView!.jumpClosure = {
                         [weak self](jumpUrl,ticketUrl,title) in

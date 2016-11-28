@@ -24,6 +24,9 @@ class HomeComicChapterCell: UITableViewCell {
     var sortBool: Bool? 
     //更多章节button
     var moreChapterBtn: UIButton?
+    var lastBtn: UIButton?
+    var jumpClosure: HomeJumpClosure?
+    var readComicClosure: ReadComicClosure?
     var model: ComicDetailReturnData? {
         didSet {
             if model != nil {
@@ -48,9 +51,7 @@ class HomeComicChapterCell: UITableViewCell {
         }
         return CGFloat(row)*(btnH+margin)+30+40
     }
-    var lastBtn: UIButton?
-    var jumpClosure: HomeJumpClosure?
-    var readComicClosure: ReadComicClosure?
+
     //上下间距
     class private var margin: CGFloat {
         return 8
@@ -84,7 +85,8 @@ class HomeComicChapterCell: UITableViewCell {
                 }else {
                     num = i
                 }
-                if chapterList![num].type != 3 {
+                //付费和VIP章节暂时不能观看
+                if chapterList![num].type != 3 && chapterList![num].type != 2 {
                     
                     let btn = UIButton(type: .Custom)
                     
